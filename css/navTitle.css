@@ -1,0 +1,33 @@
+.imgLogo {
+    height: 44px;
+}
+
+header .left {
+    position: absolute;
+    z-index: 101;
+    left: 0;
+    top: 0;
+    height: 54px;
+}
+
+header .right {
+    position: absolute;
+    z-index: 101;
+    right: 0;
+    top: 0;
+    height: 54px;
+}
+
+header .bar {
+    height: 54px;
+    width: 54px;
+    font-size: 14px;
+    color: #ffffff;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+header .bar:hover, header .bar:visited {
+    text-decoration: none;
+}

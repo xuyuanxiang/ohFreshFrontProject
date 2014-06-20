@@ -1,0 +1,41 @@
+<% if(left){ %>
+<div class="left">
+    <% if(left.html){ %>
+    <%= left.html %>
+    <% } else if(!left.html && left.url && left.label) { %>
+    <a class="bar" href="<%= left.url %>">
+        <% if(left.icon){ %>
+        <i class="fa <%= left.icon %>"></i>
+        <% } %>
+        <%= left.label %>
+    </a>
+    <% } %>
+</div>
+<% } %>
+
+<% if(center){ %>
+<center>
+    <% if(center.html){ %>
+    <%= center.html %>
+    <% } else if(!center.html && center.url && center.label) { %>
+    <a href="<%= center.url %>">
+        <%= center.label %>
+    </a>
+    <% } %>
+</center>
+<% } %>
+
+<% if(left){ %>
+<div class="right">
+    <% if(right.html){ %>
+    <%= right.html %>
+    <% } else if(!right.html && right.url && right.label) { %>
+    <a href="<%= right.url %>">
+        <%= right.label %>
+        <% if(right.icon){ %>
+        <i class="fa <%= right.icon %>"></i>
+        <% } %>
+    </a>
+    <% } %>
+</div>
+<% } %>

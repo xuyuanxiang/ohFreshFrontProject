@@ -1,0 +1,13 @@
+<ul>
+    <% _.each(collection,function(model){ %>
+    <li>
+        <a href="#order/get/<%= model.get('orderId') %>">
+            <%= model.get("productname") %>
+            单价：<%= model.get("productprice") ? '￥'+ model.get("productprice") : '' %>
+            数量：<%= model.get("count") ? Number(model.get("count")) : '' %>
+            运费：<%= model.get("freight") ? '￥'+ model.get("freight") : '' %>
+            合计：<%= model.getTotal() ? '￥'+ model.getTotal() : '' %>
+        </a>
+    </li>
+    <% }); %>
+</ul>

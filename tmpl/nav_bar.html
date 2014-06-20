@@ -1,0 +1,15 @@
+<div class="footbar">
+    <% _.each(models,function(model){ %>
+    <%= model.get('url') %>
+    <% if(model.get('path')) { %>
+    <a class="footbar-item <%= model.get('active')?'active':'' %>" href="<%= model.get('path') %>">
+        <% } else { %>
+        <a class="footbar-item <%= model.get('active')?'active':'' %>">
+            <% } %>
+            <% if(model.get('icon')){ %>
+            <span class="icon fa <%= model.get('icon') %>"></span>
+            <% } %>
+            <span class="footbar-label"><%= model.get('name') %></span>
+        </a>
+        <% }); %>
+</div>

@@ -1,0 +1,34 @@
+body {
+    font-family: Microsoft Yahei, WenQuanYi Micro Hei, Hiragino Sans GB, sans-serif;
+    color: #434A54;
+    background-color: #E6E9ED;
+}
+
+header {
+    background-image: url(../img/bg_logo.png);
+    background-repeat: repeat-x;
+    box-shadow: 1px 1px 5px 1px;
+    color: white;
+}
+
+#content {
+    margin-top: 54px;
+    margin-bottom: 72px;
+}
+
+p {
+    text-indent: 2em;
+}
+
+a {
+    text-decoration: none;
+    color: #434A54;
+}
+
+a:hover {
+    color: #009900;
+}
+
+a:active {
+    color: #009900;
+}
