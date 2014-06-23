@@ -1,11 +1,10 @@
 define(['backbone',
     '../collection/SlideCollection',
-    '../collection/SeasonsCollection',
     '../view/home/HomeLayoutView',
     '../view/home/SearchInputView',
     '../view/home/SlideView',
     '../view/home/SeasonsView'
-], function (Backbone, SlideCollection, SeasonsCollection, HomeLayoutView, SearchInputView, SlideView, SeasonsView) {
+], function (Backbone, SlideCollection, HomeLayoutView, SearchInputView, SlideView, SeasonsView) {
     var HomeRouter = Backbone.Router.extend({
         initialize: function () {
             this.homeLayoutView = new HomeLayoutView({
@@ -20,7 +19,8 @@ define(['backbone',
             var userCookie = $.cookie('user');
             if (userCookie) {
                 var user = JSON.parse(userCookie);
-                ohFresh.changeBar({path: '#user/login'}, {name: '我的', path: '#user/' + user.id});
+                if (user && user.id)
+                    ohFresh.changeBar({path: '#user/login'}, {name: '我的', path: '#user/' + user.id});
             } else {
                 ohFresh.changeBar({name: '我的'}, {name: '登录', path: '#user/login'});
             }
@@ -41,8 +41,7 @@ define(['backbone',
                 collection: new SlideCollection
             });
             this.seasonsView = new SeasonsView({
-                el: $('#seasonsContainer'),
-                collection: new SeasonsCollection
+                el: $('#seasonsContainer')
             });
             this.searchInputView.render();
             this.slideView.render();

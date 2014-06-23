@@ -1,40 +1,55 @@
 define(['backbone',
     '../model/UserModel',
     '../view/user/UserLoginView',
-    '../view/user/UserDetailView'
-], function (Backbone, UserModel, UserLoginView, UserDetailView) {
+    '../view/user/UserCenterView',
+    '../view/user/UserInfoView',
+    '../view/user/UserRegisterView'
+], function (Backbone, UserModel, UserLoginView, UserCenterView, UserInfoView, UserRegisterView) {
     var UserRouter = Backbone.Router.extend({
         initialize: function () {
             this.userLoginView = new UserLoginView({
                 el: $('#content'),
                 model: new UserModel
             });
-            this.userDetailView = new UserDetailView({
+            this.userCenterView = new UserCenterView({
+                el: $('#content'),
+                model: new UserModel
+            });
+            this.userDetailView = new UserInfoView({
+                el: $('#content'),
+                model: new UserModel
+            });
+            this.userRegisterView = new UserRegisterView({
                 el: $('#content'),
                 model: new UserModel
             });
         },
         routes: {
-            'user': 'hasLogined',
             'user/login': 'redToLogin',
-            'user/:id': 'userDetail'
-        },
-        hasLogined: function () {
-            var userCookie = $.cookie('user');
-            return !!userCookie;
+            'user/register': 'redToRegister',
+            'user/:id': 'redToUserCenter',
+            'user/detail': 'redToUserDetail'
         },
         redToLogin: function () {
             ohFresh.activeBar('登录');
             this.userLoginView.model.set({mobilephone: '', password: ''});
             this.userLoginView.render();
         },
-        userDetail: function (id) {
+        redToRegister: function () {
+            this.userRegisterView.render();
+        },
+        redToUserCenter: function (id) {
             if (ohFresh.loginAuth()) {
                 var userCookie = $.cookie('user');
-                console.log(userCookie);
-                this.userDetailView.model.set(JSON.parse(userCookie));
-                this.userDetailView.render();
+                this.userCenterView.model.set(JSON.parse(userCookie));
+                this.userCenterView.render();
                 ohFresh.activeBar('我的');
+            }
+        },
+        redToUserDetail: function () {
+            if (ohFresh.loginAuth()) {
+                this.userDetailView.model.set(this.userCenterView.model.attributes);
+                this.userDetailView.render();
             }
         }
     });
