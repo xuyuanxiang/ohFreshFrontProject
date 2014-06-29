@@ -10,48 +10,61 @@
             </div>
             <div class="form-group list-group-item">
                 <label for="inputMobile">手机号码</label>
-                <label class="control-label" for="inputName"></label>
-                <input id="inputMobile" type="text" name="mobilephone" class="form-control" placeholder="请输入手机号(*必填)"/>
+                <label class="control-label" for="inputMobile"></label>
+                <input id="inputMobile" type="text" name="mobilephone" class="form-control"
+                       value="<%= mobilephone ? mobilephone : ''%>"
+                       placeholder="请输入手机号(*必填)"/>
             </div>
             <div class="form-group list-group-item">
                 <label for="inputPassword">登录密码</label>
-                <label class="control-label" for="inputName"></label>
-                <input id="inputPassword" type="text" name="password" class="form-control" placeholder="请输入密码(*必填)"/>
+                <label class="control-label" for="inputpassword"></label>
+                <input id="inputPassword" type="text" name="password" class="form-control"
+                       placeholder="请输入密码(*必填)"/>
             </div>
             <div class="form-group list-group-item">
                 <label for="inputPasswordRepeat">密码确认</label>
-                <label class="control-label" for="inputName"></label>
+                <label class="control-label" for="inputpasswordrepeat"></label>
                 <input id="inputPasswordRepeat" type="text" class="form-control" placeholder="请再次输入密码(*必填)"/>
             </div>
             <div class="form-group list-group-item">
                 <label for="inputemail">电子邮件</label>
-                <label class="control-label" for="inputName"></label>
-                <input id="inputEmail" type="text" name="email" class="form-control" placeholder="请输入邮箱地址"/>
+                <label class="control-label" for="inputemail"></label>
+                <input id="inputEmail" type="text" name="email" class="form-control" value="<%= email%>"
+                       placeholder="请输入邮箱地址"/>
             </div>
             <div class="form-group list-group-item">
                 <label for="inputwechat">微信账号</label>
-                <label class="control-label" for="inputName"></label>
-                <input id="inputWechat" type="text" name="wechatcode" class="form-control" placeholder="请输入微信账号"/>
+                <label class="control-label" for="inputwechat"></label>
+                <input id="inputWechat" type="text" name="wechatcode" class="form-control" value="<%= wechat%>"
+                       placeholder="请输入微信账号"/>
             </div>
             <div class="form-group list-group-item">
                 <label for="selectCountry">国家</label>
-                <select id="selectCountry" name="country" class="form-control"></select>
+                <select id="selectCountry" name="country" class="form-control">
+
+                </select>
             </div>
             <div class="form-group list-group-item">
                 <label for="selectProvince">省市</label>
-                <select id="selectProvince" name="province" class="form-control"></select>
+                <select id="selectProvince" name="province" class="form-control">
+
+                </select>
             </div>
             <div class="form-group list-group-item">
                 <label for="selectCity">州市</label>
-                <select id="selectCity" name="city" class="form-control"></select>
+                <select id="selectCity" name="city" class="form-control">
+
+                </select>
             </div>
             <div class="form-group list-group-item">
                 <label for="selectCounty">区县</label>
-                <select id="selectCounty" name="county" class="form-control"></select>
+                <select id="selectCounty" name="county" class="form-control">
+
+                </select>
             </div>
             <div class="form-group list-group-item">
                 <label for="inputStreet">街道</label>
-                <textarea id="inputStreet" name="homeaddress" class="form-control"></textarea>
+                <textarea id="inputStreet" name="homeaddress" class="form-control"><%= homeaddress%></textarea>
             </div>
             <div class="form-group list-group-item">
                 <button id="btnRegisterSubmit" class="btn btn-success btn-lg btn-block" type="button">注册</button>

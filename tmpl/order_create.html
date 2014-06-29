@@ -1,0 +1,46 @@
+<div class="panel row">
+    <div class="panel-heading">
+        <h4 class="panel-title">配送信息</h4>
+    </div>
+    <div class="panel-body">
+        <form id="formOrder" class="list-group" role="form">
+            <div class="list-group-item form-group">
+                <label for="inputMobile">手机号：</label>
+                <label class="control-label" for="inputMobile"></label>
+                <input id="inputMobile" name="mobilephone" type="tel" class="form-control" placeholder="请输入手机号" required autofocus/>
+            </div>
+            <div class="list-group-item form-group">
+                <label for="inputName">姓名：</label>
+                <label class="control-label" for="inputName"></label>
+                <input id="inputName" name="name" type="text" class="form-control" placeholder="请输入真实姓名" required/>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCountry">国家</label>
+                <select id="selectCountry" name="country" class="form-control">
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectProvince">省市</label>
+                <select id="selectProvince" name="province" class="form-control">
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCity">州市</label>
+                <select id="selectCity" name="city" class="form-control">
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCounty">区县</label>
+                <select id="selectCounty" name="county" class="form-control">
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="inputStreet">街道</label>
+                <textarea id="inputStreet" name="homeaddress" class="form-control"></textarea>
+            </div>
+            <div class="list-group-item form-group">
+                <button class="btn btn-success btn-block btn-lg" type="submit">完成预订</button>
+            </div>
+        </form>
+    </div>
+</div>

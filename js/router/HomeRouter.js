@@ -1,10 +1,13 @@
 define(['backbone',
+    '../settings',
+    '../collection/ChannelCollection',
+    '../collection/ProductCollection',
     '../collection/SlideCollection',
     '../view/home/HomeLayoutView',
     '../view/home/SearchInputView',
     '../view/home/SlideView',
-    '../view/home/SeasonsView'
-], function (Backbone, SlideCollection, HomeLayoutView, SearchInputView, SlideView, SeasonsView) {
+    '../view/home/ChannelView'
+], function (Backbone, settings, ChannelCollection, ProductCollection, SlideCollection, HomeLayoutView, SearchInputView, SlideView, ChannelView) {
     var HomeRouter = Backbone.Router.extend({
         initialize: function () {
             this.homeLayoutView = new HomeLayoutView({
@@ -40,12 +43,15 @@ define(['backbone',
                 el: $('#slideContainer'),
                 collection: new SlideCollection
             });
-            this.seasonsView = new SeasonsView({
-                el: $('#seasonsContainer')
-            });
             this.searchInputView.render();
             this.slideView.render();
-            this.seasonsView.render();
+            this.channelView = new ChannelView({
+                el: $('#channelContainer'),
+                collection: new ChannelCollection
+            });
+            this.channelView.collection.fetch({
+                url: "data/d.json"
+            });
         }
     });
     return HomeRouter;

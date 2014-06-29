@@ -1,13 +1,13 @@
-<div id="loginPanel" class="panel row">
+<div id="loginPanel" class="panel">
     <div class="panel-body">
         <form id="formLogin" class="form" role="form">
             <div class="input-group">
                 <span class="input-group-addon">
-                    <span class="fa fa-phone"></span>
+                    <span class="fa fa-user"></span>
                 </span>
                 <input id="formLogin_inputMobile" type="tel" name="mobilephone" value="<%= mobilephone %>"
                        class="form-control"
-                       placeholder="请输入手机号" required
+                       placeholder="手机号/邮箱/微信号" required
                        autofocus>
             </div>
             <div class="input-group">
@@ -18,7 +18,7 @@
                        class="form-control"
                        placeholder="请输入密码" required>
             </div>
-            <button id="formLogin_btnLogin" class="btn btn-lg btn-success btn-block" type="button">登录</button>
+            <button data-loading-text="正在加载..." class="btn btn-lg btn-success btn-block" type="submit">登录</button>
             <div class="pull-left text-right">
                 <a href="#user/register" class="btn-link btn-lg btn-block">立即注册</a>
             </div>

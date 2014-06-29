@@ -5,18 +5,14 @@ body {
 }
 
 header {
-    background-image: url(../img/bg_logo.png);
-    background-repeat: repeat-x;
+    background-color: #99cc00;
     box-shadow: 1px 1px 5px 1px;
     color: white;
 }
 
 #content {
-    margin-top: 54px;
-}
-
-p {
-    text-indent: 2em;
+    padding-top: 54px;
+    padding-bottom: 30px;
 }
 
 a {
@@ -31,3 +27,97 @@ a:hover {
 a:active {
     color: #009900;
 }
+
+.alert {
+    position: fixed;
+    z-index: 999;
+    top: 25%;
+    left: 10%;
+    right: 10%;
+}
+
+.control-group {
+    display: table-row;
+}
+
+.control-button {
+    display: table-cell;
+    width: 10%;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.control-input-group {
+    display: table-cell;
+    width: 90%;
+    text-align: left;
+    vertical-align: middle;
+    position: absolute;
+
+}
+
+.control-input-addon {
+    z-index: 9999;
+}
+
+.control-input {
+    text-align: center;
+}
+
+@media (max-width: 460px) {
+    #channelContainer .thumbnail img {
+        max-height: 70px;
+        min-height: 70px;
+    }
+
+    .control-input-position {
+        position: absolute;
+        margin-top: -40px;
+    }
+
+    .control-input {
+        width: 50px;
+        height: 36px;
+        font-size: 6px;
+    }
+
+    .control-input-addon button {
+        width: 50px;
+        height: 40px;
+    }
+}
+
+@media (min-width: 461px) {
+    #channelContainer .thumbnail img {
+        max-height: 120px;
+        min-height: 120px;
+    }
+
+    .control-input {
+        width: 54px;
+        height: 40px;
+    }
+
+    .control-input-addon button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .control-input-content {
+        display: table-row;
+        vertical-align: middle;
+    }
+
+    .control-input-addon {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .control-input {
+        display: table-cell;
+        vertical-align: middle;
+    }
+}
+
+
+

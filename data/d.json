@@ -1,0 +1,26 @@
+[
+    {
+        "id": "",
+        "name": "当季特卖",
+        "items": [
+            {
+                "id": "",
+                "name": "进口水果",
+                "products": [
+                    {
+                        "id": "948cfc26acce43d08904022f984c171a",
+                        "name": "山竹220g",
+                        "price": "128",
+                        "code":"img/shanzhu1000_lg.jpg"
+                    },
+                    {
+                        "id": "880b8648e9a145d0ab26514dcb625d90",
+                        "name": "山竹8kg",
+                        "price": "1288",
+                        "code":"img/shanzhu8kg_lg.jpg"
+                    }
+                ]
+            }
+        ]
+    }
+]

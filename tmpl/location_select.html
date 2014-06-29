@@ -1,0 +1,7 @@
+<% _.each(models,function(model,index){ %>
+<% if(index == 0){ %>
+<option value="<%= model.get('id') %>" selected><%= model.get('text') %></option>
+<% } else { %>
+<option value="<%= model.get('id') %>"><%= model.get('text') %></option>
+<% } %>
+<% }); %>

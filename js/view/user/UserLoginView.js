@@ -15,7 +15,7 @@ define(['backbone',
         },
         loginValidResultRender: function () {
             if (this.model.get('result')) {
-                alert(this.model.get('result'));
+                ohFresh.alertError(this.model.get('result'));
             } else {
                 this.model.set({password: ''});
                 $.cookie('user', JSON.stringify(this.model.toJSON()));
@@ -23,19 +23,20 @@ define(['backbone',
             }
         },
         events: {
-            'click #formLogin_btnLogin': 'loginClickHandler',
+            'submit #formLogin': 'formLoginSubmit',
             'change #formLogin_inputMobile': 'inputMobileChangeHandler',
             'change #formLogin_inputPassword': 'inputPasswordChangeHandler'
         },
-        loginClickHandler: function (e) {
+        formLoginSubmit: function (e) {
             this.model.set({mobilephone: $('#formLogin_inputMobile').val(), password: $('#formLogin_inputPassword').val()});
             if (!this.model.isValid()) {
-                alert(this.model.validationError);
+                ohFresh.alertError(this.model.validationError);
             } else {
                 this.model.fetch({url: Settings.baseUrl + 'customer/login?mobilephone=' + this.model.get('mobilephone') + '&password=' + this.model.get('password')});
             }
         },
         inputMobileChangeHandler: function (e) {
+            this.model.validMobile()
             this.model.set({mobilephone: $(e.currentTarget).val()});
         },
         inputPasswordChangeHandler: function (e) {

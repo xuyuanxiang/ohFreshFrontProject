@@ -1,0 +1,60 @@
+<% _.each(models,function(model){ %>
+<h4><span class='fa fa-leaf'></span><%= model.get('name') %></h4>
+<div class='panel panel-default'>
+    <% _.each(model.get('items'),function(item){ %>
+    <div class="panel-heading">
+        <h4 class="panel-title"><%= item.name %></h4>
+    </div>
+    <div class="panel-body bg-success container-fluid">
+        <div class="row">
+            <% _.each(item.products,function(product){ %>
+            <div class='col-sm-6 col-md-6 col-xs-6'>
+                <div class='thumbnail'>
+                    <a href='#/product/get/<%= product.id %>'>
+                        <img src='<%= product.code%>'>
+                    </a>
+
+                    <div class='caption'>
+                        <a href='#/product/get/<%= product.id %>'>
+                            <p><%= product.name %></p>
+                        </a>
+
+                        <p class='text-right'>
+                    <span class='badge badge-success'>
+                        <span class='fa fa-yen'></span><%= product.price %>
+                    </span>
+                        </p>
+
+                        <div class='control-group'>
+                            <div class='control-input-group'>
+                                <div class='control-input-content'>
+                            <span class='control-input-addon'>
+                                <button class='btn-plus'>
+                                    <span class='fa fa-plus'></span>
+                                </button>
+                            </span>
+                                    <input type='number' class='control-input form-control' min="1" value='1'/>
+                            <span class='control-input-addon'>
+                                <button class='btn-minus'>
+                                    <span class='fa fa-minus'></span>
+                                </button>
+                            </span>
+                                </div>
+                            </div>
+                        <span class='control-button'>
+                            <a href='#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>'
+                               class='btn btn-warning btn-buy'>
+                                <span class='fa fa-shopping-cart'></span>
+                                <span class='hidden-xs'>立即购买</span>
+                            </a>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% }); %>
+        </div>
+    </div>
+    <% }); %>
+</div>
+<% }); %>
