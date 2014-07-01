@@ -44,7 +44,7 @@ define(['backbone',
                 collection: new SlideCollection
             });
             this.searchInputView.render();
-            this.slideView.render();
+//            this.slideView.render();
             this.channelView = new ChannelView({
                 el: $('#channelContainer'),
                 collection: new ChannelCollection

@@ -8,13 +8,20 @@ define(['backbone',
         initialize: function () {
             this.productDetailView = new ProductDetailView({
                 el: $('#content'),
-                model: ProductModel
+                model: new ProductModel
             });
         },
         routes: {
             "product/get/:id": "detailCtrl"
         },
         detailCtrl: function (id) {
+            ohFresh.navTitleView.render({
+                left: {
+                    url: 'index.html',
+                    label: '返回',
+                    icon: 'fa-chevron-left'
+                }
+            });
             this.productDetailView.model.fetch({
                 url: Settings.baseUrl + ''
             });

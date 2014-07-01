@@ -1,7 +1,65 @@
 <div class="panel">
     <div class="panel-body">
         <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <div id="slickContainer">
+                    <img src="img/shanzhu8kg_lg.jpg">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-5 col-sm-2 col-md-2 control-label">名称：</label>
 
+                <div class="col-xs-7 col-sm-10 col-md-10">
+                    <input type="hidden" class="form-control" name="productId"/>
+                    <input type="text" class="form-control disabled" name="productName"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-5 col-sm-2 col-md-2 control-label">简介：</label>
+
+                <div class="col-xs-7 col-sm-10 col-md-10">
+                    <textarea name="memo" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-5 col-sm-2 col-md-2 control-label">单价：</label>
+
+                <div class="col-xs-7 col-sm-10 col-md-10">
+                    <input type="number" name="price" class="form-control"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-5 col-sm-2 col-md-2 control-label">订购数量：</label>
+
+                <div class="col-xs-7 col-sm-10 col-md-10">
+                    <div class="input-group">
+                    <span class="input-group-btn">
+                        <a class="btn btn-default">
+                            <span class="fa fa-minus"></span>
+                        </a>
+                    </span>
+                        <input type="number" name="count" class="form-control"/>
+                     <span class="input-group-btn">
+                        <a class="btn btn-default">
+                            <span class="fa fa-plus"></span>
+                        </a>
+                    </span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-xs-5 col-sm-2 col-md-2 control-label">支付方式：</label>
+
+                <div class="col-xs-7 col-sm-10 col-md-10">
+                    <select name="payway" class="form-control">
+                        <option value="0">现金支付</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group text-center">
+                <a class="btn btn-warning btn-lg">放入购物车</a>
+                <a class="btn btn-danger btn-lg">立即订购</a>
+            </div>
         </form>
     </div>
 </div>

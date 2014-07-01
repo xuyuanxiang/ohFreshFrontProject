@@ -1,0 +1,118 @@
+<div id="cartList" class="panel panel-success row">
+    <div class="panel-heading">
+        <h4 class="panel-title">已选购商品</h4>
+    </div>
+    <div class="panel-body">
+        <% if(models && models.length>0){ %>
+        <ul class="media-list list-group">
+            <% _.each(models,function(model){ %>
+            <li class="media list-group-item">
+                <input type="checkbox" class="pull-left" value="">
+                <a class="pull-left">
+                    <img class="img-responsive" src="img/shanzhu8kg_lg.jpg">
+                </a>
+
+                <div class="media-body">
+                    <h4 class="media-heading">
+                        <%= model.get("productName") %>
+                    </h4>
+
+                    <p class="badge badge-danger">
+                        单价：
+                        <span class="fa fa-yen"></span>
+                        <%= model.get("productPrice") %>
+                    </p>
+
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                            <a class="btn btn-default">
+                                <span class="fa fa-minus"></span>
+                            </a>
+                        </span>
+                        <input type="number" class="form-control" name="count"
+                               value="<%= model.get('productCount') %>"/>
+                        <span class="input-group-btn">
+                            <a class="btn btn-default">
+                                <span class="fa fa-plus"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <% }); %>
+        </ul>
+        <% } else { %>
+        <p class="text-center">还没有选购商品。</p>
+        <% } %>
+    </div>
+</div>
+
+<div class="panel panel-success row">
+    <div class="panel-heading">
+        <h4 class="panel-title">
+            收货人信息
+        </h4>
+    </div>
+    <div class="panel-body">
+        <form role="form" class="list-group">
+            <div class="form-group list-group-item">
+                <label class="control-label">收货人</label>
+                <input type="text" name="name" class="form-control"/>
+            </div>
+            <div class="form-group list-group-item">
+                <label class="control-label">手机号码</label>
+                <input type="text" name="mobilephone" class="form-control"/>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCountry">国家</label>
+                <select id="selectCountry" name="country" class="form-control">
+
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectProvince">省市</label>
+                <select id="selectProvince" name="province" class="form-control">
+
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCity">州市</label>
+                <select id="selectCity" name="city" class="form-control">
+
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="selectCounty">区县</label>
+                <select id="selectCounty" name="county" class="form-control">
+
+                </select>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="inputStreet">街道</label>
+                <textarea id="inputStreet" name="homeaddress" class="form-control"></textarea>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="inputemail">电子邮件</label>
+                <label class="control-label" for="inputemail"></label>
+                <input id="inputEmail" type="text" name="email" class="form-control"
+                       placeholder="选填"/>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="inputwechat">微信账号</label>
+                <label class="control-label" for="inputwechat"></label>
+                <input id="inputWechat" type="text" name="wechatcode" class="form-control"
+                       placeholder="选填"/>
+            </div>
+            <div class="form-group list-group-item">
+                <label for="inputwechat">合计（不含运费）</label>
+                <label class="control-label" for="inputwechat"></label>
+                <p class="form-control-static text-danger">￥1322</p>
+            </div>
+            <div class="form-group list-group-item">
+                <% if(models.length > 0){ %>
+                <a class="btn btn-success btn-block btn-lg">结算(<%= models.length%>)</a>
+                <% } %>
+            </div>
+        </form>
+    </div>
+</div>

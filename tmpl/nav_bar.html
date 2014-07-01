@@ -9,7 +9,7 @@
             <% if(model.get('icon')){ %>
             <span class="icon fa <%= model.get('icon') %>"></span>
             <% } %>
-            <span class="footbar-label"><%= model.get('name') %></span>
+            <span class="footbar-label"><%= model.get('name') %><%= model.get('count')?'('+model.get('count')+')':''%></span>
         </a>
         <% }); %>
 </div>

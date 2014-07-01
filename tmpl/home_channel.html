@@ -1,7 +1,7 @@
 <% _.each(models,function(model){ %>
 <h4><span class='fa fa-leaf'></span><%= model.get('name') %></h4>
 <div class='panel row'>
-    <% _.each(model.get('items'),function(item){ %>
+    <% _.each(model.get('entityTypes'),function(item){ %>
     <div class="panel-heading">
         <h4 class="panel-title"><%= item.name %></h4>
     </div>
@@ -21,9 +21,9 @@
                     </p>
 
                     <p class='text-right'>
-                            <span class='badge badge-success'>
-                                <i class='fa fa-yen'></i><%= product.price %>
-                            </span>
+                        <span class='badge badge-success'>
+                            <i class='fa fa-yen'></i><%= product.price %>
+                        </span>
                     </p>
 
                     <p class="input-group pull-left">
@@ -32,7 +32,10 @@
                                 <i class="fa fa-minus"></i>
                             </a>
                         </span>
-                        <input type='number' class='form-control text-center' min="1" value='1'/>
+                        <input type="hidden" name="productName" value="<%= product.name %>"/>
+                        <input type="hidden" name="productId" value="<%= product.id %>"/>
+                        <input type="hidden" name="productPrice" value="<%= product.price %>"/>
+                        <input type="number" name="productCount" class='form-control text-center' min="1" value='1'/>
                         <span class="input-group-btn">
                             <a class="btn btn-default btn-plus">
                                 <i class="fa fa-plus"></i>
@@ -41,7 +44,7 @@
                     </p>
 
                     <p class="text-right">
-                        <a class="btn btn-warning">
+                        <a class="btn btn-warning btn-cart">
                             放入购物车
                         </a>
                         <a href="#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>"
@@ -50,30 +53,6 @@
                         </a>
                     </p>
 
-                    <!--<div class='control-group'>-->
-                    <!--<div class='control-input-group'>-->
-                    <!--<div class='control-input-content'>-->
-                    <!--<span class='control-input-addon'>-->
-                    <!--<button class='btn-plus'>-->
-                    <!--<span class='fa fa-plus'></span>-->
-                    <!--</button>-->
-                    <!--</span>-->
-                    <!--<input type='number' class='control-input form-control' min="1" value='1'/>-->
-                    <!--<span class='control-input-addon'>-->
-                    <!--<button class='btn-minus'>-->
-                    <!--<span class='fa fa-minus'></span>-->
-                    <!--</button>-->
-                    <!--</span>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="control-button">-->
-                    <!--<a href='#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>'-->
-                    <!--class='btn btn-warning btn-buy'>-->
-                    <!--<span class='fa fa-shopping-cart'></span>-->
-                    <!--<span class='hidden-xs'>立即购买</span>-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
                 </div>
             </div>
         </div>

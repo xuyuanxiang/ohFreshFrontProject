@@ -1,0 +1,18 @@
+#cartList img {
+    max-height: 80px;
+    max-width: 80px;
+    min-height: 82px;
+}
+
+#cartList input[type=checkbox] {
+    margin-top: 36px;
+}
+
+#cartList input[type=number] {
+    font-size: 8px;
+    text-align: center;
+}
+
+#cartList .badge{
+    font-size: 8px;
+}

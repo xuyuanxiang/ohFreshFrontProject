@@ -7,7 +7,8 @@ require.config({
         "css": "http://cdn.staticfile.org/require-css/0.1.1/css",
         "text": "http://cdn.staticfile.org/require-text/2.0.10/text.min",
         "underscore": "http://cdn.staticfile.org/underscore.js/1.6.0/underscore-min",
-        "backbone": "http://cdn.staticfile.org/backbone.js/1.1.2/backbone-min"
+        "backbone": "http://cdn.staticfile.org/backbone.js/1.1.2/backbone-min",
+        "slick": "http://cdn.staticfile.org/slick-carousel/1.3.6/slick.min"
     },
     shim: {
         "bootstrap": {
@@ -34,6 +35,7 @@ require(["backbone",
     "./router/UserRouter",
     "./router/ProductRouter",
     "./router/OrderRouter",
+    "./router/CartRouter",
     "./view/NavTitleView",
     "./view/NavBarView",
     "./view/AlertView",
@@ -43,7 +45,7 @@ require(["backbone",
     "css!../css/global.css",
     "bootstrap",
     "cookie"
-], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, ProductRouter, OrderRouter, NavTitleView, NavBarView, AlertView) {
+], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, ProductRouter, OrderRouter, CartRouter, NavTitleView, NavBarView, AlertView) {
     ohFresh = window.ohFresh || {};
     ohFresh.navTitleView = new NavTitleView({
         el: $('header')
@@ -95,6 +97,7 @@ require(["backbone",
     ohFresh.userRouter = new UserRouter;
     ohFresh.orderRouter = new OrderRouter;
     ohFresh.productRouter = new ProductRouter;
+    ohFresh.cartRouter = new CartRouter;
     Backbone.history.start();
 });
 

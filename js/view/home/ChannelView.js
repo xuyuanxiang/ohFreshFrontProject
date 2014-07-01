@@ -8,22 +8,12 @@ define(['backbone',
         template: _.template(homeChannelHtml),
         render: function () {
             this.$el.html(this.template(this.collection));
-//            this.$el.find('.control-input-addon').hide();
         },
         events: {
-//            'focusin .control-input-content': 'inputFocusinHandler',
-//            'focusout .control-input-content': 'inputFocusoutHandler',
             'click .btn-plus': 'btnPlusClickHandler',
-            'click .btn-minus': 'btnMinusClickHandler'
+            'click .btn-minus': 'btnMinusClickHandler',
+            'click .btn-cart': 'btnCartClickHandler',
         },
-//        inputFocusinHandler: function (e) {
-//            $(e.currentTarget).parent().addClass('control-input-position');
-//            $(e.currentTarget).parent().find('.control-input-addon').fadeIn();
-//        },
-//        inputFocusoutHandler: function (e) {
-//            $(e.currentTarget).parent().removeClass('control-input-position');
-//            $(e.currentTarget).parent().find('.control-input-addon').hide();
-//        },
         btnPlusClickHandler: function (e) {
             var input = $(e.currentTarget).parent().parent().find('input[type="number"]');
             var val = input.val();
@@ -35,6 +25,26 @@ define(['backbone',
             if (val > 1) {
                 input.val(Number(val) - 1);
             }
+        },
+        btnCartClickHandler: function (e) {
+            var productId = $(e.currentTarget).parent().parent().find('input[name="productId"]').val();
+            var productPrice = $(e.currentTarget).parent().parent().find('input[name="productPrice"]').val();
+            var productCount = $(e.currentTarget).parent().parent().find('input[name="productCount"]').val();
+            var productName = $(e.currentTarget).parent().parent().find('input[name="productName"]').val();
+            var cart = $.cookie('cart') ? JSON.parse($.cookie('cart')) : [];
+            if (cart.length > 0) {
+                _.each(cart, function (item) {
+                    if (item.productId === productId) {
+                        item.productCount += productCount;
+                    } else {
+                        cart.push({productId: productId, productName: productName, productPrice: productPrice, productCount: productCount});
+                    }
+                });
+            } else {
+                cart.push({productId: productId, productName: productName, productPrice: productPrice, productCount: productCount});
+            }
+            $.cookie('cart', JSON.stringify(cart));
+            ohFresh.navBarView.render();
         }
     });
     return ChannelView;
