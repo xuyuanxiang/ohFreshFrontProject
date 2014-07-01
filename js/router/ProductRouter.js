@@ -1,13 +1,13 @@
 define(['backbone',
+    '../settings',
     '../model/ProductModel',
     '../collection/ProductCollection',
-    '../view/product/ProductHotView'
-], function (Backbone, ProductModel, ProductCollection, ProductHotView) {
+    '../view/product/ProductDetailView'
+], function (Backbone, Settings, ProductModel, ProductCollection, ProductDetailView) {
     var ProductRouter = Backbone.Router.extend({
         initialize: function () {
-            this.productHotView = new ProductHotView({
+            this.productDetailView = new ProductDetailView({
                 el: $('#content'),
-                collection: new ProductCollection,
                 model: ProductModel
             });
         },
@@ -15,7 +15,10 @@ define(['backbone',
             "product/get/:id": "detailCtrl"
         },
         detailCtrl: function (id) {
-
+            this.productDetailView.model.fetch({
+                url: Settings.baseUrl + ''
+            });
+            this.productDetailView.render();
         }
     });
     return ProductRouter;

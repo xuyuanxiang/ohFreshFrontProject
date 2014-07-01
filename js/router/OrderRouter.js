@@ -7,7 +7,7 @@ define(['backbone',
     '../view/order/OrderDetailView',
     '../view/order/OrderListView',
     '../view/order/OrderCreateView'
-], function (Backbone, settings, OrderModel, LocationCollection, LocationSelectView, OrderCollection, OrderDetailView, OrderListView, OrderCreateView) {
+], function (Backbone, Settings, OrderModel, LocationCollection, LocationSelectView, OrderCollection, OrderDetailView, OrderListView, OrderCreateView) {
     var OrderRouter = Backbone.Router.extend({
         initialize: function () {
             this.orderListView = new OrderListView({
@@ -31,6 +31,13 @@ define(['backbone',
             'order/list/:mobilephone/:status': 'list'
         },
         create: function (id, name, price) {
+            ohFresh.navTitleView.render({
+                left: {
+                    url: 'index.html',
+                    label: '返回',
+                    icon: 'fa-chevron-left'
+                }
+            });
             this.orderCreateView.model.set({productId: id, productame: name, price: price});
             this.orderCreateView.render();
             var locations = new LocationCollection;

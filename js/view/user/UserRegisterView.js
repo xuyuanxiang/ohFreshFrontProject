@@ -13,10 +13,12 @@ define(['backbone',
             this.$el.html(this.template(this.model.attributes));
         },
         successRender: function () {
+            $('button[type="submit"]').button('reset');
             ohFresh.alertError(this.model.get("message"));
         },
-        errorRender: function () {
-            alert('error');
+        errorRender: function (e) {
+            $('button[type="submit"]').button('reset');
+            ohFresh.ajaxErrorHandler(e);
         },
         events: {
             'focusout #inputName': 'validName',
@@ -28,7 +30,7 @@ define(['backbone',
             'change #selectCountry': 'selectedCountry',
             'change #selectProvince': 'selectedProvince',
             'change #selectCity': 'selectedCity',
-            'click #btnRegisterSubmit': 'doRegister'
+            'submit #formRegister': 'doRegister'
         },
         selectedCountry: function (e) {
             var currentCountry = ohFresh.countrySelectView.collection.where({id: $(e.currentTarget).val()})[0];
@@ -187,6 +189,7 @@ define(['backbone',
             }
         },
         doRegister: function () {
+            $('button[type="submit"]').button('loading');
             if (this.validName() && this.validMobile()
                 && this.validPassword() && this.validPasswordRepeat()
                 && this.validEmail() && this.validWechat()) {

@@ -34,11 +34,25 @@ define(['backbone',
                 'user/detail': 'redToUserDetail'
             },
             redToLogin: function () {
+                ohFresh.navTitleView.render({
+                    left: {
+                        url: '',
+                        label: '',
+                        icon: ''
+                    }
+                });
                 ohFresh.activeBar('登录');
                 this.userLoginView.model.set({mobilephone: '', password: ''});
                 this.userLoginView.render();
             },
             redToRegister: function () {
+                ohFresh.navTitleView.render({
+                    left: {
+                        url: '#user/login',
+                        label: '返回',
+                        icon: 'fa-chevron-left'
+                    }
+                });
                 this.userRegisterView.render();
                 var locations = new LocationCollection;
                 locations.fetch({

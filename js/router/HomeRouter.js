@@ -29,9 +29,9 @@ define(['backbone',
             }
             ohFresh.navTitleView.render({
                 left: {
-                    url: 'index.html',
-                    label: '返回',
-                    icon: 'fa-chevron-left'
+                    url: '',
+                    label: '',
+                    icon: ''
                 }
             });
             ohFresh.activeBar('主页');

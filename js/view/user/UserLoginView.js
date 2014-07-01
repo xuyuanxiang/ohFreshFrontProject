@@ -6,14 +6,15 @@ define(['backbone',
     var LoginView = Backbone.View.extend({
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
-            this.listenTo(this.model, 'sync', this.loginValidResultRender);
-            this.listenTo(this.model, 'error', ohFresh.ajaxErrorHandler);
+            this.listenTo(this.model, 'sync', this.successRender);
+            this.listenTo(this.model, 'error', this.errorRender);
         },
         template: _.template(loginHtml),
         render: function () {
             this.$el.html(this.template(this.model.attributes));
         },
-        loginValidResultRender: function () {
+        successRender: function (e) {
+            $('button[type="submit"]').button('reset');
             if (this.model.get('result')) {
                 ohFresh.alertError(this.model.get('result'));
             } else {
@@ -22,12 +23,17 @@ define(['backbone',
                 location.href = "index.html";
             }
         },
+        errorRender: function (e) {
+            $('button[type="submit"]').button('reset');
+            ohFresh.ajaxErrorHandler(e);
+        },
         events: {
             'submit #formLogin': 'formLoginSubmit',
             'change #formLogin_inputMobile': 'inputMobileChangeHandler',
             'change #formLogin_inputPassword': 'inputPasswordChangeHandler'
         },
         formLoginSubmit: function (e) {
+            $('button[type="submit"]').button('loading');
             this.model.set({mobilephone: $('#formLogin_inputMobile').val(), password: $('#formLogin_inputPassword').val()});
             if (!this.model.isValid()) {
                 ohFresh.alertError(this.model.validationError);

@@ -24,8 +24,7 @@ define(['backbone',
                     html: ''
                 }
             };
-            $.extend(settings, options);
-            this.$el.html(_.template(navTitleHtml, settings));
+            this.$el.html(_.template(navTitleHtml, $.extend(settings, options)));
         }
     });
     return NavTitleView;

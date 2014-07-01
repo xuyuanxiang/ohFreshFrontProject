@@ -1,59 +1,83 @@
 <% _.each(models,function(model){ %>
 <h4><span class='fa fa-leaf'></span><%= model.get('name') %></h4>
-<div class='panel panel-default'>
+<div class='panel row'>
     <% _.each(model.get('items'),function(item){ %>
     <div class="panel-heading">
         <h4 class="panel-title"><%= item.name %></h4>
     </div>
-    <div class="panel-body bg-success container-fluid">
-        <div class="row">
-            <% _.each(item.products,function(product){ %>
-            <div class='col-sm-6 col-md-6 col-xs-6'>
-                <div class='thumbnail'>
-                    <a href='#/product/get/<%= product.id %>'>
-                        <img src='<%= product.code%>'>
-                    </a>
+    <div class="panel-body row bg-success">
+        <% _.each(item.products,function(product){ %>
+        <div class='product-item'>
+            <div class='thumbnail'>
+                <a href='#/product/get/<%= product.id %>'>
+                    <img class="thumbnail-img" src='<%= product.code%>'>
+                </a>
 
-                    <div class='caption'>
+                <div class='caption'>
+                    <p>
                         <a href='#/product/get/<%= product.id %>'>
-                            <p><%= product.name %></p>
+                            <%= product.name %>
                         </a>
+                    </p>
 
-                        <p class='text-right'>
-                    <span class='badge badge-success'>
-                        <span class='fa fa-yen'></span><%= product.price %>
-                    </span>
-                        </p>
+                    <p class='text-right'>
+                            <span class='badge badge-success'>
+                                <i class='fa fa-yen'></i><%= product.price %>
+                            </span>
+                    </p>
 
-                        <div class='control-group'>
-                            <div class='control-input-group'>
-                                <div class='control-input-content'>
-                            <span class='control-input-addon'>
-                                <button class='btn-plus'>
-                                    <span class='fa fa-plus'></span>
-                                </button>
-                            </span>
-                                    <input type='number' class='control-input form-control' min="1" value='1'/>
-                            <span class='control-input-addon'>
-                                <button class='btn-minus'>
-                                    <span class='fa fa-minus'></span>
-                                </button>
-                            </span>
-                                </div>
-                            </div>
-                        <span class='control-button'>
-                            <a href='#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>'
-                               class='btn btn-warning btn-buy'>
-                                <span class='fa fa-shopping-cart'></span>
-                                <span class='hidden-xs'>立即购买</span>
+                    <p class="input-group pull-left">
+                         <span class="input-group-btn">
+                            <a class="btn btn-default btn-minus">
+                                <i class="fa fa-minus"></i>
                             </a>
                         </span>
-                        </div>
-                    </div>
+                        <input type='number' class='form-control text-center' min="1" value='1'/>
+                        <span class="input-group-btn">
+                            <a class="btn btn-default btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                    </p>
+
+                    <p class="text-right">
+                        <a class="btn btn-warning">
+                            放入购物车
+                        </a>
+                        <a href="#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>"
+                           class="btn btn-danger">
+                            立即订购
+                        </a>
+                    </p>
+
+                    <!--<div class='control-group'>-->
+                    <!--<div class='control-input-group'>-->
+                    <!--<div class='control-input-content'>-->
+                    <!--<span class='control-input-addon'>-->
+                    <!--<button class='btn-plus'>-->
+                    <!--<span class='fa fa-plus'></span>-->
+                    <!--</button>-->
+                    <!--</span>-->
+                    <!--<input type='number' class='control-input form-control' min="1" value='1'/>-->
+                    <!--<span class='control-input-addon'>-->
+                    <!--<button class='btn-minus'>-->
+                    <!--<span class='fa fa-minus'></span>-->
+                    <!--</button>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="control-button">-->
+                    <!--<a href='#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>'-->
+                    <!--class='btn btn-warning btn-buy'>-->
+                    <!--<span class='fa fa-shopping-cart'></span>-->
+                    <!--<span class='hidden-xs'>立即购买</span>-->
+                    <!--</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
                 </div>
             </div>
-            <% }); %>
         </div>
+        <% }); %>
     </div>
     <% }); %>
 </div>

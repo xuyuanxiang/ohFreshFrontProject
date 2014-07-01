@@ -32,6 +32,7 @@ require(["backbone",
     './collection/PrivilegeCollection',
     "./router/HomeRouter",
     "./router/UserRouter",
+    "./router/ProductRouter",
     "./router/OrderRouter",
     "./view/NavTitleView",
     "./view/NavBarView",
@@ -42,7 +43,7 @@ require(["backbone",
     "css!../css/global.css",
     "bootstrap",
     "cookie"
-], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, OrderRouter, NavTitleView, NavBarView, AlertView) {
+], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, ProductRouter, OrderRouter, NavTitleView, NavBarView, AlertView) {
     ohFresh = window.ohFresh || {};
     ohFresh.navTitleView = new NavTitleView({
         el: $('header')
@@ -93,6 +94,7 @@ require(["backbone",
     ohFresh.homeRouter = new HomeRouter;
     ohFresh.userRouter = new UserRouter;
     ohFresh.orderRouter = new OrderRouter;
+    ohFresh.productRouter = new ProductRouter;
     Backbone.history.start();
 });
 
