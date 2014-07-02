@@ -1,7 +1,5 @@
-#cartList img {
-    max-height: 80px;
-    max-width: 80px;
-    min-height: 82px;
+#cartList .times {
+    font-size: 18px;
 }
 
 #cartList input[type=checkbox] {
@@ -13,6 +11,38 @@
     text-align: center;
 }
 
-#cartList .badge{
+#cartList .badge {
     font-size: 8px;
+}
+
+@media (max-width: 320px) {
+    #cartList img {
+        max-width: 70px;
+        max-height: 82px;
+        min-height: 82px;
+    }
+}
+
+@media (min-width: 321px) and (max-width: 400px) {
+    #cartList img {
+        max-width: 82px;
+        max-height: 82px;
+        min-height: 82px;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 480px) {
+    #cartList img {
+        max-width: 120px;
+        max-height: 82px;
+        min-height: 82px;
+    }
+}
+
+@media (min-width: 481px) {
+    #cartList img {
+        max-width: 140px;
+        max-height: 82px;
+        min-height: 82px;
+    }
 }

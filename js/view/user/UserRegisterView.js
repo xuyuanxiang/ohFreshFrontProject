@@ -1,7 +1,8 @@
 define(['backbone',
     '../../settings',
     '../../collection/LocationCollection',
-    'text!../../../tmpl/user_register.html'
+    'text!../../../tmpl/user_register.html',
+    'cookie'
 ], function (Backbone, Settings, LocationCollection, userRegisterHtml) {
     var UserRegisterView = Backbone.View.extend({
         initialize: function () {
@@ -13,24 +14,29 @@ define(['backbone',
             this.$el.html(this.template(this.model.attributes));
         },
         successRender: function () {
-            $('button[type="submit"]').button('reset');
-            ohFresh.alertError(this.model.get("message"));
+            $('#btnDoRegister').button('reset');
+            ohFresh.alertSuccess();
+            this.model.set({password: ''});
+            $.cookie('user', JSON.stringify(this.model.attributes));
+            ohFresh.confirm(this.model.get("message"), '提示', function () {
+            });
+            location.href = 'index.html';
         },
         errorRender: function (e) {
-            $('button[type="submit"]').button('reset');
-            ohFresh.ajaxErrorHandler(e);
+            $('#btnDoRegister').button('reset');
+            ohFresh.ajaxErrorHandler();
         },
         events: {
-            'focusout #inputName': 'validName',
-            'focusout #inputMobile': 'validMobile',
-            'focusout #inputPassword': 'validPassword',
-            'focusout #inputPasswordRepeat': 'validPasswordRepeat',
-            'focusout #inputEmail': 'validEmail',
-            'focusout #inputWechat': 'validWechat',
-            'change #selectCountry': 'selectedCountry',
-            'change #selectProvince': 'selectedProvince',
-            'change #selectCity': 'selectedCity',
-            'submit #formRegister': 'doRegister'
+            'focusout #formRegister #inputName': 'validName',
+            'focusout #formRegister #inputMobile': 'validMobile',
+            'focusout #formRegister #inputPassword': 'validPassword',
+            'focusout #formRegister #inputPasswordRepeat': 'validPasswordRepeat',
+            'focusout #formRegister #inputEmail': 'validEmail',
+            'focusout #formRegister  #inputWechat': 'validWechat',
+            'change #formRegister #selectCountry': 'selectedCountry',
+            'change #formRegister #selectProvince': 'selectedProvince',
+            'change #formRegister #selectCity': 'selectedCity',
+            'click #formRegister #btnDoRegister': 'doRegister'
         },
         selectedCountry: function (e) {
             var currentCountry = ohFresh.countrySelectView.collection.where({id: $(e.currentTarget).val()})[0];
@@ -164,7 +170,7 @@ define(['backbone',
         },
         validWechat: function () {
             if ($('#inputWechat').val()) {
-                this.model.set({wechat: $('#inputWechat').val()})
+                this.model.set({wechatcode: $('#inputWechat').val()})
                 if (this.model.validWechat()) {
                     if ($('#inputWechat').parent().hasClass('has-error'))
                         $('#inputWechat').parent().removeClasss('has-error');
@@ -189,10 +195,11 @@ define(['backbone',
             }
         },
         doRegister: function () {
-            $('button[type="submit"]').button('loading');
+            $('#btnDoRegister').button('loading');
             if (this.validName() && this.validMobile()
                 && this.validPassword() && this.validPasswordRepeat()
                 && this.validEmail() && this.validWechat()) {
+                this.model.set({countryId: $('#selectCountry').val(), provinceId: $('#selectProvince').val(), countyId: $('#selectCounty').val(), cityId: $('#selectCity').val()});
                 this.model.fetch({url: Settings.baseUrl + 'customer/save'});
             }
         }

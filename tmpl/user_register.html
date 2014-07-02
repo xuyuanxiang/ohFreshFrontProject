@@ -1,4 +1,4 @@
-<form id="formRegister" role="form" class="list-group">
+<form id="formRegister" role="form" class="list-group" method="post">
     <div class="panel panel-success row">
         <div class="panel-heading">
             <h4 class="panel-title">用户注册</h4>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="form-group list-group-item row">
-        <button class="btn btn-success btn-lg btn-block" type="submit">注册</button>
+        <button id="btnDoRegister" data-loading-text="正在注册..." class="btn btn-success btn-lg btn-block" type="button">注册</button>
         <a href="#user/login" class="btn btn-danger btn-lg btn-block" type="button">取消</a>
     </div>
 </form>

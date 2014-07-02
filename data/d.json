@@ -2,7 +2,7 @@
     {
         "id": "1",
         "name": "在线预定",
-        "entityTypes": [
+        "items": [
             {
                 "id": "1",
                 "name": "进口水果",
@@ -11,16 +11,17 @@
                         "id": "1",
                         "name": "山竹",
                         "code": "img/shanzhu1000_lg.jpg",
-                        "items": [
+
+                        "children": [
                             {
                                 "id": "948cfc26acce43d08904022f984c171a",
-                                "name": "山竹/3A/220g",
-                                "price": "128"
+                                "name": "山竹/5A/220g",
+                                "price": "32"
                             },
                             {
                                 "id": "880b8648e9a145d0ab26514dcb625d90",
                                 "name": "山竹/5A/8kg",
-                                "price": "128"
+                                "price": "168"
                             }
                         ]
                     }

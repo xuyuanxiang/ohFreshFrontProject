@@ -30,38 +30,10 @@ a:active {
 
 .alert {
     position: fixed;
-    z-index: 999;
+    z-index: 9999;
     top: 25%;
     left: 10%;
     right: 10%;
-}
-
-.control-group {
-    display: table-row;
-}
-
-.control-button {
-    display: table-cell;
-    width: 10%;
-    text-align: right;
-    vertical-align: middle;
-}
-
-.control-input-group {
-    display: table-cell;
-    width: 90%;
-    text-align: left;
-    vertical-align: middle;
-    position: absolute;
-
-}
-
-.control-input-addon {
-    z-index: 9999;
-}
-
-.control-input {
-    text-align: center;
 }
 
 @media (max-width: 399px) {

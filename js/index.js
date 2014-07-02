@@ -57,14 +57,17 @@ require(["backbone",
     ohFresh.alertView = new AlertView({
         el: $('#content')
     });
+    ohFresh.confirm = function (msg, title, okCallbackFunction, cancleCallbackFunction) {
+        ohFresh.alertView.render(msg, title, 'alert-success', okCallbackFunction, cancleCallbackFunction);
+    };
     ohFresh.alertError = function (msg) {
-        ohFresh.alertView.renderError(msg);
+        ohFresh.alertView.render(msg, null, 'alert-danger');
     };
     ohFresh.alertSuccess = function (msg) {
-        ohFresh.alertView.renderSuccess(msg);
-    }
+        ohFresh.alertView.render(msg, null, 'alert-success');
+    };
     ohFresh.ajaxErrorHandler = function (err) {
-        ohFresh.alert('服务器连接失败！请稍后再试...');
+        ohFresh.alertError('服务器连接失败！请稍后再试...');
     };
     ohFresh.activeBar = function (name) {
         _.each(ohFresh.navBarView.collection.models, function (model) {

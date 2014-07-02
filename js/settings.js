@@ -1,6 +1,6 @@
 define([], function () {
     return {
-        baseUrl: "http://www.xuyuanxiang.cn:8080/tjpowermgm/",
+        baseUrl: "http://192.168.3.80:8080/tjpowermgm/",
         footBars: [
             {
                 path: '#home',
@@ -15,7 +15,7 @@ define([], function () {
                 active: false
             },
             {
-                path: '#cart',
+                path: '#orders',
                 name: '购物车',
                 icon: 'fa-shopping-cart',
                 active: false

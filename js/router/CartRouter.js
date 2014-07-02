@@ -14,10 +14,7 @@ define(['backbone',
             "cart": "cartCtrl"
         },
         cartCtrl: function () {
-            ohFresh.activeBar('购物车');
-            var cart = $.cookie('cart') ? JSON.parse($.cookie('cart')) : [];
-            this.cartView.collection.set(cart);
-            this.cartView.render();
+
         }
     });
     return CartRouter;

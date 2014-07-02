@@ -1,4 +1,22 @@
-<div class="alert alert-dismissable">
+<div id="alert" class="alert <%= type %>">
     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <span id="errorMsg"><%= message %></span>
+    <% if(title) { %>
+    <h4><%= title %></h4>
+    <% } %>
+    <p><%= message %></p>
+
+    <% if(showOk || showCancle) { %>
+    <p class="text-right">
+        <% if(showCancle){ %>
+        <a id="alert_btnCancle" class="btn btn-danger">
+            取消
+        </a>
+        <% } %>
+        <% if(showOk) { %>
+        <a id="alert_btnOk" class="btn btn-success">
+            确定
+        </a>
+        <% } %>
+    </p>
+    <% } %>
 </div>

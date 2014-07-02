@@ -1,7 +1,7 @@
 <% _.each(models,function(model){ %>
 <h4><span class='fa fa-leaf'></span><%= model.get('name') %></h4>
 <div class='panel row'>
-    <% _.each(model.get('entityTypes'),function(item){ %>
+    <% _.each(model.get('items'),function(item){ %>
     <div class="panel-heading">
         <h4 class="panel-title"><%= item.name %></h4>
     </div>
@@ -20,21 +20,25 @@
                         </a>
                     </p>
 
-                    <p class='text-right'>
-                        <span class='badge badge-success'>
-                            <i class='fa fa-yen'></i><%= product.price %>
+                    <p class='pull-right'>
+                        <span class='badge badge-danger' style="font-size: 16px">
+                            <i class='fa fa-yen'></i><span id="price"><%= product.children[0].price %></span>
                         </span>
                     </p>
 
-                    <p class="input-group pull-left">
+                    <p class="input-group">
+                        <select id="selectProduct" class="form-control" name="product">
+                            <% _.each(product.children,function(child){ %>
+                            <option data-price="<%= child.price %>" value="<%= child.id %>"><%= child.name %></option>
+                            <% }); %>
+                        </select>
+                    </p>
+                    <p class="input-group">
                          <span class="input-group-btn">
                             <a class="btn btn-default btn-minus">
                                 <i class="fa fa-minus"></i>
                             </a>
                         </span>
-                        <input type="hidden" name="productName" value="<%= product.name %>"/>
-                        <input type="hidden" name="productId" value="<%= product.id %>"/>
-                        <input type="hidden" name="productPrice" value="<%= product.price %>"/>
                         <input type="number" name="productCount" class='form-control text-center' min="1" value='1'/>
                         <span class="input-group-btn">
                             <a class="btn btn-default btn-plus">
@@ -47,8 +51,7 @@
                         <a class="btn btn-warning btn-cart">
                             放入购物车
                         </a>
-                        <a href="#/order/create/<%= product.id %>/<%= product.name %>/<%= product.price%>"
-                           class="btn btn-danger">
+                        <a class="btn btn-danger btn-order">
                             立即订购
                         </a>
                     </p>
