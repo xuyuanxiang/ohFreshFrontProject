@@ -15,14 +15,16 @@ define(['backbone',
             countyId: '',
             homeaddress: '',
             products: '',
-            productCollection: []
+            productCollection: [],
+            paytype: ''
         },
         sync: function (method, model, options) {
             return $.ajax(_.extend({
-                type: 'get',
+                type: 'post',
                 dataType: 'jsonp',
                 jsonpCallback: 'callback',
                 url: model.url,
+                data: model.attributes,
                 contentType: 'application/json;charset=utf-8'
             }, options));
         },

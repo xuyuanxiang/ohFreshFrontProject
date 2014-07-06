@@ -1,17 +1,105 @@
 define(['backbone',
+    '../../settings',
+    '../../collection/LocationCollection',
+    '../../view/LocationSelectView',
     'text!../../../tmpl/order_create.html',
-    'cookie'
-], function (Backbone, orderCreateHtml) {
+    'css!../../../css/orderCreate.css',
+    'cookie',
+    'bootstrap'
+], function (Backbone, Settings, LocationCollection, LocationSelectView, orderCreateHtml) {
     var OrderCreateView = Backbone.View.extend({
         initialize: function () {
             this.listenTo(this.model, 'sync', this.successRender);
-            this.listenTo(this.model, 'error', ohFresh.ajaxErrorHandler);
+            this.listenTo(this.model, 'error', this.errorRender);
         },
         template: _.template(orderCreateHtml),
         render: function () {
             this.$el.html(this.template(this.model));
+            var user = $.cookie('user') ? JSON.parse($.cookie('user')) : {};
+            var locations = new LocationCollection;
+            locations.fetch({
+                url: Settings.baseUrl + 'customer/getArea',
+                success: function (collection) {
+                    if (collection) {
+                        var countries = collection.models;
+                        if (user)
+                            _.each(countries, function (country) {
+                                if (country.get('id') == user.countryId)
+                                    country.set({selected: true});
+                            });
+                        ohFresh.countrySelectView = new LocationSelectView({
+                            el: $('#selectCountry'),
+                            collection: new LocationCollection(countries)
+                        });
+                        ohFresh.countrySelectView.render();
+                        if (countries && countries.length > 0) {
+                            var provinces = countries[0].get("children");
+                            if (user)
+                                _.each(provinces, function (province) {
+                                    if (province.id == user.provinceId)
+                                        province.selected = true;
+                                });
+                            ohFresh.provinceSelectView = new LocationSelectView({
+                                el: $('#selectProvince'),
+                                collection: new LocationCollection(provinces)
+                            });
+                            ohFresh.provinceSelectView.render();
+                            if (provinces && provinces.length > 0) {
+                                var cities = provinces[0].children;
+                                if (user)
+                                    _.each(cities, function (city) {
+                                        if (city.id == user.cityId)
+                                            city.selected = true;
+                                    });
+                                ohFresh.citySelectView = new LocationSelectView({
+                                    el: $('#selectCity'),
+                                    collection: new LocationCollection(cities)
+                                });
+                                ohFresh.citySelectView.render();
+                                if (cities && cities.length > 0) {
+                                    var counties = cities[0].children;
+                                    if (user)
+                                        _.each(counties, function (county) {
+                                            if (county.id == user.countyId)
+                                                county.selected = true;
+                                        });
+                                    ohFresh.countySelectView = new LocationSelectView({
+                                        el: $('#selectCounty'),
+                                        collection: new LocationCollection(counties)
+                                    });
+                                    ohFresh.countySelectView.render();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        },
+        filterCart: function (products) {
+            var carts = $.cookie('cart') ? JSON.parse($.cookie('cart')) : [];
+            var newCarts = [];
+            _.each(carts, function (cart) {
+                if (_.where(products, {productId: cart.productId}).length <= 0) {
+                    newCarts.push(cart);
+                }
+            });
+            $.cookie('cart', newCarts.length > 0 ? JSON.stringify(newCarts) : null);
         },
         successRender: function () {
+            $('#formOrder .btn-success').button('reset');
+            this.filterCart(JSON.parse(this.model.get('products')));
+            if (this.model.get('result') == 1) {
+                ohFresh.confirm(this.model.get('message'), '提示', function () {
+                    ohFresh.homeRouter.navigate('home', {trigger: true});
+                });
+            } else {
+                ohFresh.alertError(this.model.get('message'));
+            }
+
+        },
+        errorRender: function () {
+            $('#formOrder .btn-success').button('reset');
+            ohFresh.ajaxErrorHandler();
         },
         events: {
             'change #cartList #selectCountry': 'selectedCountry',
@@ -143,7 +231,7 @@ define(['backbone',
         btnRemoveItem: function (e) {
             var model = this.model;
             var self = this;
-            ohFresh.confirm('确定要将此商品移出购物车？', '', function () {
+            ohFresh.confirm('确定要移除此商品？', '', function () {
                 var productCollection = [];
                 _.each(model.get("productCollection"), function (item) {
                     if (item.productId != $(e.currentTarget).attr('data-id')) {
@@ -194,15 +282,18 @@ define(['backbone',
                 var cityId = this.$el.find('#selectCity').val();
                 var countyId = this.$el.find('#selectCounty').val();
                 var products = _.where(this.model.get("productCollection"), {checked: true});
+                var paymentMethod = this.$el.find('select[name="paymentＭethod"]').val();
                 this.model.set({
                     countryId: countryId,
                     provinceId: provinceId,
                     cityId: cityId,
                     countyId: countyId,
                     products: JSON.stringify(products),
-                    productCollection: []
+                    productCollection: [],
+                    paymentMethod: paymentMethod
                 });
-                this.model.fetch({url: ''});
+                $(e.currentTarget).button('loading');
+                this.model.fetch({url: Settings.baseUrl + 'eorder/save'});
             }
         },
         productNumChangeHandler: function (e) {

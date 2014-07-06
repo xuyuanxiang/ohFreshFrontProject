@@ -35,17 +35,16 @@ require(["backbone",
     "./router/UserRouter",
     "./router/ProductRouter",
     "./router/OrderRouter",
-    "./router/CartRouter",
     "./view/NavTitleView",
     "./view/NavBarView",
     "./view/AlertView",
     "css!../css/bootstrap.min.css",
-    "css!../css/bootflat.css",
+    "css!../css/bootflat.min.css",
     "css!http://cdn.staticfile.org/font-awesome/4.1.0/css/font-awesome.min.css",
     "css!../css/global.css",
     "bootstrap",
     "cookie"
-], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, ProductRouter, OrderRouter, CartRouter, NavTitleView, NavBarView, AlertView) {
+], function (Backbone, Settings, PrivilegeCollection, HomeRouter, UserRouter, ProductRouter, OrderRouter, NavTitleView, NavBarView, AlertView) {
     ohFresh = window.ohFresh || {};
     ohFresh.navTitleView = new NavTitleView({
         el: $('header')
@@ -100,7 +99,6 @@ require(["backbone",
     ohFresh.userRouter = new UserRouter;
     ohFresh.orderRouter = new OrderRouter;
     ohFresh.productRouter = new ProductRouter;
-    ohFresh.cartRouter = new CartRouter;
     Backbone.history.start();
 });
 

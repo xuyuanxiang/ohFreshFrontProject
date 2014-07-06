@@ -7,7 +7,7 @@ define(['backbone',
     '../view/home/SearchInputView',
     '../view/home/SlideView',
     '../view/home/ChannelView'
-], function (Backbone, settings, ChannelCollection, ProductCollection, SlideCollection, HomeLayoutView, SearchInputView, SlideView, ChannelView) {
+], function (Backbone, Settings, ChannelCollection, ProductCollection, SlideCollection, HomeLayoutView, SearchInputView, SlideView, ChannelView) {
     var HomeRouter = Backbone.Router.extend({
         initialize: function () {
             this.homeLayoutView = new HomeLayoutView({
@@ -50,7 +50,7 @@ define(['backbone',
                 collection: new ChannelCollection
             });
             this.channelView.collection.fetch({
-                url: "data/d.json"
+                url: Settings.baseUrl + "productins/getFrontPageMessage"
             });
         }
     });

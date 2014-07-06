@@ -7,12 +7,7 @@
 }
 
 #cartList input[type=number] {
-    font-size: 8px;
     text-align: center;
-}
-
-#cartList .badge {
-    font-size: 8px;
 }
 
 @media (max-width: 320px) {

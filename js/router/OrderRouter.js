@@ -1,14 +1,12 @@
 define(['backbone',
     '../settings',
     '../model/OrderModel',
-    '../collection/LocationCollection',
-    '../view/LocationSelectView',
     '../collection/OrderCollection',
     '../view/order/OrderDetailView',
     '../view/order/OrderListView',
     '../view/order/OrderCreateView',
     "cookie"
-], function (Backbone, Settings, OrderModel, LocationCollection, LocationSelectView, OrderCollection, OrderDetailView, OrderListView, OrderCreateView) {
+], function (Backbone, Settings, OrderModel, OrderCollection, OrderDetailView, OrderListView, OrderCreateView) {
     var OrderRouter = Backbone.Router.extend({
         initialize: function () {
             this.orderListView = new OrderListView({
@@ -33,13 +31,20 @@ define(['backbone',
             'order/list/:mobilephone/:status': 'list'
         },
         createOrders: function () {
+            ohFresh.navTitleView.render({
+                left: {
+                    url: '#home',
+                    label: '返回',
+                    icon: 'fa-chevron-left'
+                }
+            });
             ohFresh.activeBar('购物车');
             var products = $.cookie('cart') ? JSON.parse($.cookie('cart')) : [];
             var user = $.cookie('user') ? JSON.parse($.cookie('user')) : {};
             if (products.length > 0)
                 this.orderCreateView.model.set({
                     products: JSON.stringify(products),
-                    productCollection: products,
+                    productCollection: products
                 });
             if (user && user.id) {
                 this.orderCreateView.model.set({
@@ -56,69 +61,12 @@ define(['backbone',
                 });
             }
             this.orderCreateView.render();
-            var locations = new LocationCollection;
-            locations.fetch({
-                url: Settings.baseUrl + 'customer/getArea',
-                success: function (collection) {
-                    if (collection) {
-                        var countries = collection.models;
-                        if (user)
-                            _.each(countries, function (country) {
-                                if (country.get('id') == user.countryId)
-                                    country.set({selected: true});
-                            });
-                        ohFresh.countrySelectView = new LocationSelectView({
-                            el: $('#selectCountry'),
-                            collection: new LocationCollection(countries)
-                        });
-                        ohFresh.countrySelectView.render();
-                        if (countries && countries.length > 0) {
-                            var provinces = countries[0].get("children");
-                            if (user)
-                                _.each(provinces, function (province) {
-                                    if (province.id == user.provinceId)
-                                        province.selected = true;
-                                });
-                            ohFresh.provinceSelectView = new LocationSelectView({
-                                el: $('#selectProvince'),
-                                collection: new LocationCollection(provinces)
-                            });
-                            ohFresh.provinceSelectView.render();
-                            if (provinces && provinces.length > 0) {
-                                var cities = provinces[0].children;
-                                if (user)
-                                    _.each(cities, function (city) {
-                                        if (city.id == user.cityId)
-                                            city.selected = true;
-                                    });
-                                ohFresh.citySelectView = new LocationSelectView({
-                                    el: $('#selectCity'),
-                                    collection: new LocationCollection(cities)
-                                });
-                                ohFresh.citySelectView.render();
-                                if (cities && cities.length > 0) {
-                                    var counties = cities[0].children;
-                                    if (user)
-                                        _.each(counties, function (county) {
-                                            if (county.id == user.countyId)
-                                                county.selected = true;
-                                        });
-                                    ohFresh.countySelectView = new LocationSelectView({
-                                        el: $('#selectCounty'),
-                                        collection: new LocationCollection(counties)
-                                    });
-                                    ohFresh.countySelectView.render();
-                                }
-                            }
-                        }
-                    }
-                }
-            });
+
         },
         createOrder: function (id, name, price, count) {
             ohFresh.navTitleView.render({
                 left: {
-                    url: 'index.html',
+                    url: '#home',
                     label: '返回',
                     icon: 'fa-chevron-left'
                 }
@@ -151,64 +99,6 @@ define(['backbone',
                 });
             }
             this.orderCreateView.render();
-            var locations = new LocationCollection;
-            locations.fetch({
-                url: Settings.baseUrl + 'customer/getArea',
-                success: function (collection) {
-                    if (collection) {
-                        var countries = collection.models;
-                        if (user)
-                            _.each(countries, function (country) {
-                                if (country.get('id') == user.countryId)
-                                    country.set({selected: true});
-                            });
-                        ohFresh.countrySelectView = new LocationSelectView({
-                            el: $('#selectCountry'),
-                            collection: new LocationCollection(countries)
-                        });
-                        ohFresh.countrySelectView.render();
-                        if (countries && countries.length > 0) {
-                            var provinces = countries[0].get("children");
-                            if (user)
-                                _.each(provinces, function (province) {
-                                    if (province.id == user.provinceId)
-                                        province.selected = true;
-                                });
-                            ohFresh.provinceSelectView = new LocationSelectView({
-                                el: $('#selectProvince'),
-                                collection: new LocationCollection(provinces)
-                            });
-                            ohFresh.provinceSelectView.render();
-                            if (provinces && provinces.length > 0) {
-                                var cities = provinces[0].children;
-                                if (user)
-                                    _.each(cities, function (city) {
-                                        if (city.id == user.cityId)
-                                            city.selected = true;
-                                    });
-                                ohFresh.citySelectView = new LocationSelectView({
-                                    el: $('#selectCity'),
-                                    collection: new LocationCollection(cities)
-                                });
-                                ohFresh.citySelectView.render();
-                                if (cities && cities.length > 0) {
-                                    var counties = cities[0].children;
-                                    if (user)
-                                        _.each(counties, function (county) {
-                                            if (county.id == user.countyId)
-                                                county.selected = true;
-                                        });
-                                    ohFresh.countySelectView = new LocationSelectView({
-                                        el: $('#selectCounty'),
-                                        collection: new LocationCollection(counties)
-                                    });
-                                    ohFresh.countySelectView.render();
-                                }
-                            }
-                        }
-                    }
-                }
-            });
         },
         detail: function (id) {
             var results = this.orderListView.collection.where({orderId: id});
